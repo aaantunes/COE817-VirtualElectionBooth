@@ -1,17 +1,26 @@
 package VirtualElectionBooth;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Hashtable;
+
+/*Class is solely for testing shit I dont know how to do yet*/
 public class main {
-    public static void main(String[] args) {
-        String temp = "Andre_4577_CLA";
 
-        String[] voterInfo = temp.split("_");
+    private static Hashtable<String, Integer> voterList = new Hashtable<>();
 
-        String voteMsg = "";
-        for (int i = 0; i < voterInfo.length - 1; i++){
-            System.out.println(voterInfo[i]);
-            voteMsg += voterInfo[i] + "_";
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new FileReader("BallotList.txt"));
+        String line = br.readLine();
+        while (line != null){
+            String[] temp = line.split("_");
+            int validNum = Integer.parseInt(temp[1]);
+            System.out.println("Valid num: " + validNum);
+            voterList.put(temp[0],validNum);
+            line = br.readLine();
         }
 
-        System.out.println("\n"+voteMsg);
+        System.out.println(voterList);
     }
 }
