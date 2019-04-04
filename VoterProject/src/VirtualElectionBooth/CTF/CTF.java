@@ -21,8 +21,7 @@ public class CTF {
     *
     * Voter voted verification method:
     *   send hashed version of file to Voter
-    *   such that they can verify their vote counted
-    *
+    *   such that they can verify their vote counter
     * */
 
     public static void main(String[] args) {
@@ -43,7 +42,7 @@ public class CTF {
 class CTFServer extends Thread{
     private Socket socket;
 
-    //list containing all eligable voters received from CLA
+    //list containing all eligable voters(Who can still vote/ have not voted yet) received from CLA
     private static ArrayList<String> voterList = new ArrayList<>();
 
     public CTFServer(Socket socket){
@@ -57,25 +56,39 @@ class CTFServer extends Thread{
             PrintWriter out = new PrintWriter(socket.getOutputStream(),true);
 
             System.out.println("Client connected on: " + currentThread().getName());
+            System.out.println("-----------------------------\n");
 
-            String voteMsg = "DOESNT WORK";
+            String voterID = "";
+            String voterMessage = "";
             String receivedMsg;
+
+//            updateVoterListWithBallots(); //updates on start up?
 
             while((receivedMsg = in.readLine()) != null){
                 if (receivedMsg.contains("CLA")){
                     System.out.println("RECEIVED CLA THREAD");
-                    String[] voterInfo = receivedMsg.split("_");
-                    System.out.println("Adding: " + receivedMsg + ", to voterList\n");
-                    voterList.add(receivedMsg);
-                }
-                voteMsg = receivedMsg;
-                System.out.println("Received: " + voteMsg + " from voter");
-//                out.println(); //send something idk?
-            }
+                    String[] voterSplit = receivedMsg.split("_");
+                    voterID = voterSplit[0] + "_" + voterSplit[1];
 
-            System.out.println(voterList);
-            if(canVoterVote(voteMsg)){
-                writeToFile(voteMsg);
+                    System.out.println("Adding: " + voterID + ", to voterList\n");
+                    voterList.add(voterID);
+                } else {
+                    System.out.println("RECEIVED VOTER THREAD");
+                    voterMessage = receivedMsg;
+                    System.out.println("Received: " + voterMessage + " from voter");
+                    System.out.println("-----------------------------\n");
+
+                    String[] voterSplit = voterMessage.split("_");
+                    voterID = voterSplit[0] + "_" + voterSplit[1];
+
+                    if(canVoterVote(voterID)){
+                        writeToFile(voterMessage);
+                        System.out.println("VoterList before remove" +voterList);
+                        voterList.remove(voterID);
+                        System.out.println("VoterList after remove" +voterList);
+                    }
+                }
+//                out.println(); //If need to send something send here?
             }
 
         } catch (IOException e){
@@ -87,43 +100,31 @@ class CTFServer extends Thread{
         }
     }
 
+    /*Checks if voterMsg sent by voter is in voterList (allowing them to vote)
+     *   add voterMsg to Ballot.txt
+     * else
+     *   send out voter already voted (proof of vote?)
+     */
+    public boolean canVoterVote(String voterMsg){
+        boolean canVote = false;
+        System.out.println("\ncanVoterVote's voterMsg is: " + voterMsg);
+        if (voterList.contains(voterMsg)){
+            System.out.println("VOTER CAN VOTE!!!\n");
+            canVote = true;
+        }
+        return canVote;
+    }
+
+    public void writeToFile(String voteMsg) throws IOException{
+        FileWriter fw = new FileWriter("BallotList.txt", true);
+        fw.write(voteMsg + "\n");
+        fw.close();
+    }
+
     /*USE IF WANT TO DELETE FILE EVERYTIME
      *Or dont use so we have a larger voter list when demoing*/
     public void deleteFile(){
         File file = new File("BallotList.txt");
         file.delete();
     }
-
-    public void writeToFile(String voteMsg){
-        FileWriter fw = null;
-        try{
-            fw = new FileWriter("BallotList.txt", true);
-            fw.write(voteMsg + "\n");
-            fw.close();
-        } catch (IOException e){
-            e.getMessage();
-        }
-    }
-
-    /*Checks if voterMsg sent by voter is in voterList (allowing them to vote)
-    *   add voterMsg to Ballot.txt
-    * else
-    *   send out voter already voted (proof of vote?)
-    */
-    public boolean canVoterVote(String voterMsg){
-        boolean canVote = false;
-
-        return canVote;
-    }
-
-    /* If user is valid, call getValidNum
-     * Else, Create validNum, add to array list, and call sendToCTF */
-//    public int checkUserValidation(String username){
-//        if (voterList.containsKey(username)){
-//            return voterList.get(username);
-//        } else {
-//            voterList.put(username, createValidNum());
-//            return voterList.get(username);
-//        }
-//    }
 }
