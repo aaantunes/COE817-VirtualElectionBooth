@@ -41,7 +41,7 @@ public class Voter {
             out.println(username);
             while (true) {
                 if ((validNum = in.readLine()) != null) {
-                    System.out.println("Valid Num is: " + validNum);
+                    System.out.println("Voters Validation Number is: " + validNum);
                     break;
                 }
             }
@@ -57,7 +57,6 @@ public class Voter {
         Scanner scanner = new Scanner(System.in);
         int vote = scanner.nextInt();
         String voteMsg = username + "_" + validationKey+ "_" + vote;
-        System.out.println("TESTING: " + voteMsg);
         return voteMsg;
     }
 
@@ -70,13 +69,14 @@ public class Voter {
 
 
     public static void connectToCTF(String vote){
-        System.out.println("Connecting to CTF...");
+        System.out.println("\nConnecting to CTF...");
 
         try (Socket socket = new Socket("localhost", 1201)) {
-            System.out.println("You are now connected to CTF on Port# " + socket.getPort());
+            System.out.println("You are now connected to CTF on Port# " + socket.getPort() + "\n");
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
 
+            System.out.println("Sending vote: " + vote);
             out.println(vote);
 //            while (true) {
 //                if ((validNum = in.readLine()) != null) {
