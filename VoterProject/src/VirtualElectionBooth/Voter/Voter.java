@@ -59,7 +59,6 @@ public class Voter {
                 connectToCTF(createVote(username,validNum));
                 System.out.println("Exiting the VirtualElectionBooth application...");
             }
-//            connectToCTF(createVote(username,validNum));
 
         } catch (IOException e){
             e.getMessage();
@@ -90,7 +89,6 @@ public class Voter {
                 "2. Ahmed Diab\n" +
                 "To vote please enter the candidates respective value!");
     }
-
 
     public static void connectToCTF(String vote){
         System.out.println("\nConnecting to CTF...");
