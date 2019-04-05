@@ -2,7 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f368e408-1003-4597-9b53-f51e5eb396d1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/BallotList.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BallotList.txt" beforeDir="false" afterPath="$PROJECT_DIR$/BallotList.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/VoterProject/VirtualElectionBooth/CLA/CLAServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/VoterProject/VirtualElectionBooth/CLA/CLAServer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/VoterProject/VirtualElectionBooth/CTF/CTFServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/VoterProject/VirtualElectionBooth/CTF/CTFServer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/VoterProject/VirtualElectionBooth/Voter/Voter.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/VoterProject/VirtualElectionBooth/Voter/Voter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/VoterProject/VirtualElectionBooth/main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/VoterProject/VirtualElectionBooth/main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/VirtualElectionBooth/CLA/CLA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/VirtualElectionBooth/CLA/CLA.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/VirtualElectionBooth/CTF/CTF.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/VirtualElectionBooth/CTF/CTF.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/VirtualElectionBooth/Voter/Voter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/VirtualElectionBooth/Voter/Voter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/VirtualElectionBooth/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/VirtualElectionBooth/main.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -45,12 +54,13 @@
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="2697" />
+          <entry key="JAVA" value="4947" />
           <entry key="PLAIN_TEXT" value="189" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
+          <entry key="JAVA" value="2" />
           <entry key="PLAIN_TEXT" value="4" />
         </counts>
       </usages-collector>
@@ -59,34 +69,22 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/VirtualElectionBooth/CLA/CLA.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="12" column="50" lean-forward="true" selection-start-line="12" selection-start-column="50" selection-end-line="12" selection-end-column="50" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/VirtualElectionBooth/Voter/Voter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="38" column="54" lean-forward="true" selection-start-line="38" selection-start-column="54" selection-end-line="38" selection-end-column="54" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/VirtualElectionBooth/CTF/CTF.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1255">
-              <caret line="115" column="24" lean-forward="true" selection-start-line="115" selection-start-column="24" selection-end-line="115" selection-end-column="24" />
+            <state relative-caret-position="351">
+              <caret line="130" column="9" selection-start-line="130" selection-start-column="9" selection-end-line="130" selection-end-column="9" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/VirtualElectionBooth/CLA/CLA.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="351">
+              <caret line="61" column="61" selection-start-line="61" selection-start-column="61" selection-end-line="61" selection-end-column="61" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -95,10 +93,24 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/VirtualElectionBooth/Voter/Voter.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="374">
+              <caret line="76" column="36" selection-start-line="76" selection-start-column="36" selection-end-line="76" selection-end-column="36" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#4135#4136#0" expanded="true" />
+                <element signature="e#4165#4166#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/BallotList.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
+            <state relative-caret-position="187">
+              <caret line="11" column="20" lean-forward="true" selection-start-line="11" selection-start-column="20" selection-end-line="11" selection-end-column="20" />
             </state>
           </provider>
         </entry>
@@ -106,11 +118,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/VirtualElectionBooth/main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="16" column="44" selection-start-line="16" selection-start-column="44" selection-end-line="16" selection-end-column="44" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="289">
+              <caret line="17" column="11" selection-start-line="17" selection-start-column="11" selection-end-line="17" selection-end-column="11" />
             </state>
           </provider>
         </entry>
@@ -140,9 +149,9 @@
         <option value="$PROJECT_DIR$/src/VirtualElectionBooth/Server.java" />
         <option value="$PROJECT_DIR$/src/VirtualElectionBooth/CLA/Server.java" />
         <option value="$PROJECT_DIR$/src/VirtualElectionBooth/main.java" />
-        <option value="$PROJECT_DIR$/src/VirtualElectionBooth/Voter/Voter.java" />
         <option value="$PROJECT_DIR$/src/VirtualElectionBooth/CLA/CLA.java" />
         <option value="$PROJECT_DIR$/src/VirtualElectionBooth/CTF/CTF.java" />
+        <option value="$PROJECT_DIR$/src/VirtualElectionBooth/Voter/Voter.java" />
       </list>
     </option>
   </component>
@@ -176,6 +185,43 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="VirtualElectionBooth" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="VoterProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="VoterProject" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="VirtualElectionBooth" type="462c0819:PsiDirectoryNode" />
+              <item name="CLA" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="VoterProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="VoterProject" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="VirtualElectionBooth" type="462c0819:PsiDirectoryNode" />
+              <item name="CLA" type="462c0819:PsiDirectoryNode" />
+              <item name="CLA.java" type="529ef68f:ClassesTreeStructureProvider$PsiClassOwnerTreeNode" />
+            </path>
+            <path>
+              <item name="VoterProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="VoterProject" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="VirtualElectionBooth" type="462c0819:PsiDirectoryNode" />
+              <item name="CTF" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="VoterProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="VoterProject" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="VirtualElectionBooth" type="462c0819:PsiDirectoryNode" />
+              <item name="CTF" type="462c0819:PsiDirectoryNode" />
+              <item name="CTF.java" type="529ef68f:ClassesTreeStructureProvider$PsiClassOwnerTreeNode" />
+            </path>
+            <path>
+              <item name="VoterProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="VoterProject" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="VirtualElectionBooth" type="462c0819:PsiDirectoryNode" />
+              <item name="Voter" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -187,7 +233,7 @@
     <property name="Downloaded.Files.Path.Enabled" value="false" />
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1554484380854" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1554499895859" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.0" />
@@ -299,7 +345,21 @@
       <option name="project" value="LOCAL" />
       <updated>1554484349755</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Clean Version of Updated Code">
+      <created>1554484371126</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1554484371126</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Clean Version of Updated Code">
+      <created>1554484455035</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1554484455035</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TodoView">
@@ -320,7 +380,7 @@
       <window_info id="UI Designer" order="3" />
       <window_info id="Capture Tool" order="4" />
       <window_info id="Favorites" order="5" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="6" visible="true" weight="0.13355705" />
+      <window_info content_ui="combo" id="Project" order="6" visible="true" weight="0.13355705" />
       <window_info anchor="bottom" id="Version Control" order="0" show_stripe_button="false" />
       <window_info anchor="bottom" id="Terminal" order="1" weight="0.32907802" />
       <window_info anchor="bottom" id="Event Log" order="2" side_tool="true" />
@@ -339,7 +399,7 @@
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="5" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="6" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="7" weight="0.25" />
-      <window_info anchor="right" id="Run" order="8" visible="true" weight="0.43288592" />
+      <window_info active="true" anchor="right" id="Run" order="8" visible="true" weight="0.33221477" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -352,30 +412,17 @@
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/VirtualElectionBooth/CLA/Server.java" />
-    <entry file="file://$PROJECT_DIR$/src/VirtualElectionBooth/CLA/CLA.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="50" lean-forward="true" selection-start-line="12" selection-start-column="50" selection-end-line="12" selection-end-column="50" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/VirtualElectionBooth/main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="44" selection-start-line="16" selection-start-column="44" selection-end-line="16" selection-end-column="44" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="289">
+          <caret line="17" column="11" selection-start-line="17" selection-start-column="11" selection-end-line="17" selection-end-column="11" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/VirtualElectionBooth/Voter/Voter.java">
+    <entry file="file://$PROJECT_DIR$/src/VirtualElectionBooth/CLA/CLA.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="38" column="54" lean-forward="true" selection-start-line="38" selection-start-column="54" selection-end-line="38" selection-end-column="54" />
+        <state relative-caret-position="351">
+          <caret line="61" column="61" selection-start-line="61" selection-start-column="61" selection-end-line="61" selection-end-column="61" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -384,8 +431,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/VirtualElectionBooth/CTF/CTF.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1255">
-          <caret line="115" column="24" lean-forward="true" selection-start-line="115" selection-start-column="24" selection-end-line="115" selection-end-column="24" />
+        <state relative-caret-position="351">
+          <caret line="130" column="9" selection-start-line="130" selection-start-column="9" selection-end-line="130" selection-end-column="9" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -394,8 +441,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/BallotList.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
+        <state relative-caret-position="187">
+          <caret line="11" column="20" lean-forward="true" selection-start-line="11" selection-start-column="20" selection-end-line="11" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/VirtualElectionBooth/Voter/Voter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="76" column="36" selection-start-line="76" selection-start-column="36" selection-end-line="76" selection-end-column="36" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#4135#4136#0" expanded="true" />
+            <element signature="e#4165#4166#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

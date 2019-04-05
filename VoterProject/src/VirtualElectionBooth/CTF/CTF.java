@@ -35,8 +35,8 @@ public class CTF {
 
             while(true){
                 new CTFServer(serverSocket.accept()).start();
+                //no way to exit application bc of this while loop
             }
-
         } catch (IOException e){
             e.printStackTrace();
         }
@@ -65,29 +65,31 @@ class CTFServer extends Thread{
 
             while((receivedMsg = in.readLine()) != null){
                 if (receivedMsg.contains("CLA")){
+                    //received msg from CLA thread
                     String[] voterSplit = receivedMsg.split("_");
                     voterID = voterSplit[0] + "_" + voterSplit[1];
 
-//                    System.out.println("Adding: " + voterID + ", to voterList");
                     voterList.add(voterID);
                 } else {
+                    //receviced msg from Voter thread
                     System.out.println("--------------------------------------------");
                     voterMessage = receivedMsg;
-//                    System.out.println("Received: " + voterMessage + " from voter");
 
-                    String[] voterSplit = voterMessage.split("_");
-                    voterID = voterSplit[0] + "_" + voterSplit[1];
-
-                    if(canVoterVote(voterID)){
-                        writeToFile(voterMessage);
-                        voterList.remove(voterID);
+                    if (voterMessage.toUpperCase().equals("EXIT")){
+                        tallyVotes();
+                        break;
                     } else {
-                        //Send voter cannot vote to voter
+                        String[] voterSplit = voterMessage.split("_");
+                        voterID = voterSplit[0] + "_" + voterSplit[1];
+
+                        if(canVoterVote(voterID)){
+                            System.out.println(voterSplit[0] + " has voted!");
+                            writeToFile(voterMessage);
+                            voterList.remove(voterID);
+                        }
                     }
                 }
-//                out.println(); //If need to send something send here?
             }
-
         } catch (IOException e){
             e.getMessage();
         } finally {
@@ -97,18 +99,10 @@ class CTFServer extends Thread{
         }
     }
 
-    /*Checks if voterMsg sent by voter is in voterList (allowing them to vote)
-     *   add voterMsg to Ballot.txt
-     * else
-     *   send out voter already voted (proof of vote?)
-     */
     public boolean canVoterVote(String voterMsg){
         boolean canVote = false;
         if (voterList.contains(voterMsg)){
-            System.out.println("This voter is eligable to vote\n");
             canVote = true;
-        } else {
-            System.out.println("This voter is not eligable to vote\n");
         }
         return canVote;
     }
@@ -119,9 +113,30 @@ class CTFServer extends Thread{
         fw.close();
     }
 
-    /*If ever need to delete File*/
-    public void deleteFile(){
-        File file = new File("BallotList.txt");
-        file.delete();
+    /*Tally votes after receiving a message to talley votes
+    * Could do either admin voter or tally votes voter*/
+    public void tallyVotes() throws IOException{
+        BufferedReader br = new BufferedReader(new FileReader("BallotList.txt"));
+        String line = br.readLine();
+        int vote1 = 0, vote2 = 0;
+        while (line != null){
+            String[] temp = line.split("_");
+            int vote = Integer.parseInt(temp[2]);
+            if (vote == 1){
+                vote1++;
+            } else if(vote == 2){
+                vote2++;
+            }
+            line = br.readLine();
+        }
+        if (vote1 > vote2){
+            System.out.println("Andre Antunes wins the election!");
+        } else if (vote1 < vote2){
+            System.out.println("Ahmed Diab wins the election!");
+        } else if (vote1 == vote2){
+            System.out.println("There was a tie!");
+        } else {
+            System.out.println("Something went wrong");
+        }
     }
 }
