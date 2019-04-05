@@ -26,6 +26,7 @@ public class CLA {
 
             while(true){
                 new CLAServer(serverSocket.accept()).start();
+                //no way to exit application bc of this while loop
             }
         } catch (IOException e){
             e.printStackTrace();
@@ -57,12 +58,20 @@ class CLAServer extends Thread{
             while((receivedMsg = in.readLine()) != null){
                 System.out.println("--------------------------------------------");
                 username = receivedMsg;
-                System.out.println("Received voter's username: " + username);
-                validationKey = checkUserValidation(username);
-                out.println(validationKey);
-                System.out.println("Sent voter's validation number: " + validationKey);
+                 if (username.toUpperCase().equals("EXIT")){
+                     System.out.println("The election is over...");
+                     break;
+                 } else {
+                     System.out.println("Received voter's username: " + username);
+                     validationKey = checkUserValidation(username);
+                     out.println(validationKey);
+                     if (validationKey != 100000){
+                         System.out.println("Sent voter's validation number: " + validationKey);
+                     } else {
+                         System.out.println("Voter is unable to vote");
+                     }
+                 }
             }
-
         } catch (IOException e){
             e.getMessage();
         } finally {
@@ -91,7 +100,7 @@ class CLAServer extends Thread{
      * Else, Create validNum, add to array list, and call sendToCTF */
     public int checkUserValidation(String username){
         if (voterList.containsKey(username)){
-            return voterList.get(username);
+            return 100000;
         } else {
             voterList.put(username, createValidNum());
             String voterMsg = username + "_" + voterList.get(username);
@@ -118,13 +127,6 @@ class CLAServer extends Thread{
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
 
             out.println(voterMsg + "_CLA");
-            //if I wanted to read anything from CTF:
-//            while (true) {
-//                if ((validNum = in.readLine()) != null) {
-//                    System.out.println("Valid Num is: " + validNum);
-//                    break;
-//                }
-//            }
         } catch (IOException e){
             e.getMessage();
         }

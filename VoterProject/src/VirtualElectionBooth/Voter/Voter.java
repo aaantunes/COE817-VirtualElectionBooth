@@ -39,13 +39,27 @@ public class Voter {
             System.out.println("Please enter a username: ");
             username = scanner.nextLine();
             out.println(username);
-            while (true) {
-                if ((validNum = in.readLine()) != null) {
-                    System.out.println("Voters Validation Number is: " + validNum);
-                    break;
+            if (!username.toUpperCase().equals("EXIT")){
+                while (true) {
+                    if ((validNum = in.readLine()) != null) {
+                        if (!validNum.equals("100000")){
+                            System.out.println("Voters Validation Number is: " + validNum);
+                            connectToCTF(createVote(username,validNum));
+                            break;
+                        } else {
+                            System.out.println("Sorry, you already voted");
+                            //this is where we could show proof they voted (decrypt "BallotList.txt"?
+                            break;
+                        }
+                    }
                 }
+            } else {
+                //username = "exit";
+                validNum = null;
+                connectToCTF(createVote(username,validNum));
+                System.out.println("Exiting the VirtualElectionBooth application...");
             }
-            connectToCTF(createVote(username,validNum));
+//            connectToCTF(createVote(username,validNum));
 
         } catch (IOException e){
             e.getMessage();
@@ -53,10 +67,20 @@ public class Voter {
     }
 
     public static String createVote(String username, String validationKey){
-        displayCandidates();
-        Scanner scanner = new Scanner(System.in);
-        int vote = scanner.nextInt();
-        String voteMsg = username + "_" + validationKey+ "_" + vote;
+        String voteMsg = "";
+        if (!username.toUpperCase().equals("EXIT")){
+            displayCandidates();
+            Scanner scanner = new Scanner(System.in);
+            int vote = scanner.nextInt();
+            if (vote < 1 || vote > 2){
+                System.out.println("Please enter an optional value");
+                createVote(username, validationKey);
+            }
+            voteMsg = username + "_" + validationKey+ "_" + vote;
+        } else {
+            //username = "exit"
+            voteMsg = "exit";
+        }
         return voteMsg;
     }
 
