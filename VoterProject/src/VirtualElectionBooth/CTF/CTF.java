@@ -8,14 +8,14 @@ import java.util.ArrayList;
 public class CTF {
 
     /*Goals:
-    * Receive voterList from CLA
+    * X Receive voterList from CLA
     * X Receive VoterMsg from Voter
     *   if voterMsg is in file:
     *       cannot vote, returns vote?
     *   else:
     *       add voterMsg to ballotList.txt
     *
-    * On receiving admin or exit voter:
+    * X On receiving admin or exit voter:
     *    Tally up results from file
     *    display winner
     *
@@ -23,7 +23,7 @@ public class CTF {
     *   send hashed version of file to Voter
     *   such that they can verify their vote counter
     *
-    * Add a method to tell voter that he cannot vote:
+    * X Add a method to tell voter that he cannot vote:
     *   currently, voter is still given the option to choose who to vote for
     *   although he doesnt actually vote. it would be nice to not give him the option
     * */

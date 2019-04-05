@@ -96,8 +96,6 @@ class CLAServer extends Thread{
         }
     }
 
-    /* If user is valid, call getValidNum
-     * Else, Create validNum, add to array list, and call sendToCTF */
     public int checkUserValidation(String username){
         if (voterList.containsKey(username)){
             return 100000;
