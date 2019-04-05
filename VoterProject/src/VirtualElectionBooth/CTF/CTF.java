@@ -15,19 +15,23 @@ public class CTF {
     *   else:
     *       add voterMsg to ballotList.txt
     *
-    * On CLA closing connection:
+    * On receiving admin or exit voter:
     *    Tally up results from file
     *    display winner
     *
     * Voter voted verification method:
     *   send hashed version of file to Voter
     *   such that they can verify their vote counter
+    *
+    * Add a method to tell voter that he cannot vote:
+    *   currently, voter is still given the option to choose who to vote for
+    *   although he doesnt actually vote. it would be nice to not give him the option
     * */
 
     public static void main(String[] args) {
         //Set up connection with voter
         try (ServerSocket serverSocket = new ServerSocket(1201)){
-            System.out.println("CTFServer Starting...\nWaiting for connections...");
+            System.out.println("CTFServer Starting...\nWaiting for connections...\n");
 
             while(true){
                 new CTFServer(serverSocket.accept()).start();
@@ -55,37 +59,30 @@ class CTFServer extends Thread{
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             PrintWriter out = new PrintWriter(socket.getOutputStream(),true);
 
-            System.out.println("Client connected on: " + currentThread().getName());
-            System.out.println("-----------------------------\n");
-
             String voterID = "";
             String voterMessage = "";
             String receivedMsg;
 
-//            updateVoterListWithBallots(); //updates on start up?
-
             while((receivedMsg = in.readLine()) != null){
                 if (receivedMsg.contains("CLA")){
-                    System.out.println("RECEIVED CLA THREAD");
                     String[] voterSplit = receivedMsg.split("_");
                     voterID = voterSplit[0] + "_" + voterSplit[1];
 
-                    System.out.println("Adding: " + voterID + ", to voterList\n");
+//                    System.out.println("Adding: " + voterID + ", to voterList");
                     voterList.add(voterID);
                 } else {
-                    System.out.println("RECEIVED VOTER THREAD");
+                    System.out.println("--------------------------------------------");
                     voterMessage = receivedMsg;
-                    System.out.println("Received: " + voterMessage + " from voter");
-                    System.out.println("-----------------------------\n");
+//                    System.out.println("Received: " + voterMessage + " from voter");
 
                     String[] voterSplit = voterMessage.split("_");
                     voterID = voterSplit[0] + "_" + voterSplit[1];
 
                     if(canVoterVote(voterID)){
                         writeToFile(voterMessage);
-                        System.out.println("VoterList before remove" +voterList);
                         voterList.remove(voterID);
-                        System.out.println("VoterList after remove" +voterList);
+                    } else {
+                        //Send voter cannot vote to voter
                     }
                 }
 //                out.println(); //If need to send something send here?
@@ -107,10 +104,11 @@ class CTFServer extends Thread{
      */
     public boolean canVoterVote(String voterMsg){
         boolean canVote = false;
-        System.out.println("\ncanVoterVote's voterMsg is: " + voterMsg);
         if (voterList.contains(voterMsg)){
-            System.out.println("VOTER CAN VOTE!!!\n");
+            System.out.println("This voter is eligable to vote\n");
             canVote = true;
+        } else {
+            System.out.println("This voter is not eligable to vote\n");
         }
         return canVote;
     }
@@ -121,8 +119,7 @@ class CTFServer extends Thread{
         fw.close();
     }
 
-    /*USE IF WANT TO DELETE FILE EVERYTIME
-     *Or dont use so we have a larger voter list when demoing*/
+    /*If ever need to delete File*/
     public void deleteFile(){
         File file = new File("BallotList.txt");
         file.delete();

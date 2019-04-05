@@ -22,6 +22,7 @@ public class CLA {
         //Set up connection with voter
         try (ServerSocket serverSocket = new ServerSocket(1200)){
             System.out.println("CLAServer Starting...\nWaiting for connections...");
+            System.out.println("\nUpdating Voter List...\n");
 
             while(true){
                 new CLAServer(serverSocket.accept()).start();
@@ -47,29 +48,20 @@ class CLAServer extends Thread{
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             PrintWriter out = new PrintWriter(socket.getOutputStream(),true);
 
-            System.out.println("Voter connected on: " +currentThread().getId());
-            System.out.println("-----------------------------\n");
-
             String username;
             int validationKey;
             String receivedMsg;
 
-            System.out.println("UPDATED VOTER LIST!!!");
             updateVoterListWithBallots();
-            System.out.println(voterList);
-            System.out.println("-----------------------------\n");
 
             while((receivedMsg = in.readLine()) != null){
+                System.out.println("--------------------------------------------");
                 username = receivedMsg;
-                System.out.println("Received: " + username);
-                System.out.println("-----------------------------\n");
+                System.out.println("Received voter's username: " + username);
                 validationKey = checkUserValidation(username);
                 out.println(validationKey);
-                System.out.println("Sent to voter: " + validationKey);
-                System.out.println("-----------------------------\n");
+                System.out.println("Sent voter's validation number: " + validationKey);
             }
-
-            System.out.println(voterList);
 
         } catch (IOException e){
             e.getMessage();
@@ -118,10 +110,10 @@ class CLAServer extends Thread{
     }
 
     public static void connectToCTF(String voterMsg){
-        System.out.println("Connecting to CTF...");
+        System.out.println("\nConnecting to CTF...");
 
         try (Socket socket = new Socket("localhost", 1201)) {
-            System.out.println("You are now connected to CTF on Port# " + socket.getPort());
+            System.out.println("You are now connected to CTF on Port# " + socket.getPort() + "\n");
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
 
