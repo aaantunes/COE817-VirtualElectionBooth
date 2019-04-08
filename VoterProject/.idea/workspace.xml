@@ -3,17 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="f368e408-1003-4597-9b53-f51e5eb396d1" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/VoterProject/VirtualElectionBooth/CLA/CLA.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/VoterProject/VirtualElectionBooth/CLA/CLA.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/VoterProject/VirtualElectionBooth/CLA/CLAServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/VoterProject/VirtualElectionBooth/CLA/CLAServer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/VoterProject/VirtualElectionBooth/CTF/CTF.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/VoterProject/VirtualElectionBooth/CTF/CTF.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/VoterProject/VirtualElectionBooth/CTF/CTFServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/VoterProject/VirtualElectionBooth/CTF/CTFServer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/VoterProject/VirtualElectionBooth/Encryption/JEncryptDES.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/VoterProject/VirtualElectionBooth/Encryption/JEncryptDES.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/VoterProject/VirtualElectionBooth/Encryption/JEncryptRSA.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/VoterProject/VirtualElectionBooth/Encryption/JEncryptRSA.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/VoterProject/VirtualElectionBooth/Voter/Voter.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/VoterProject/VirtualElectionBooth/Voter/Voter.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/VirtualElectionBooth/CLA/CLA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/VirtualElectionBooth/CLA/CLA.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/VirtualElectionBooth/CTF/CTF.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/VirtualElectionBooth/CTF/CTF.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/VirtualElectionBooth/Encryption/JEncryptDES.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/VirtualElectionBooth/Encryption/JEncryptDES.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/VirtualElectionBooth/Encryption/JEncryptRSA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/VirtualElectionBooth/Encryption/JEncryptRSA.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/VirtualElectionBooth/Voter/Voter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/VirtualElectionBooth/Voter/Voter.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -32,8 +23,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/VirtualElectionBooth/CTF/CTF.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="69" column="12" selection-start-line="69" selection-start-column="12" selection-end-line="70" selection-end-column="82" />
+            <state relative-caret-position="1207">
+              <caret line="73" lean-forward="true" selection-start-line="73" selection-end-line="73" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -44,7 +35,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/VirtualElectionBooth/Encryption/JEncryptDES.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
+            <state relative-caret-position="-255">
               <caret line="10" column="24" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="24" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -56,7 +47,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/VirtualElectionBooth/Encryption/JEncryptRSA.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="646">
+            <state relative-caret-position="624">
               <caret line="38" column="10" selection-start-line="38" selection-start-column="10" selection-end-line="38" selection-end-column="10" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -77,8 +68,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/VirtualElectionBooth/CLA/CLA.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="71" column="82" selection-start-line="71" selection-start-column="82" selection-end-line="71" selection-end-column="82" />
+            <state relative-caret-position="1117">
+              <caret line="147" column="80" selection-start-line="147" selection-start-column="80" selection-end-line="147" selection-end-column="80" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#updateVoterListWithBallots#0;class#CLAServer#0" />
@@ -92,12 +83,10 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/VirtualElectionBooth/Voter/Voter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="476">
-              <caret line="109" lean-forward="true" selection-start-line="109" selection-end-line="109" />
+            <state relative-caret-position="267">
+              <caret line="45" column="39" selection-start-line="45" selection-start-column="39" selection-end-line="45" selection-end-column="39" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#4181#4182#0" expanded="true" />
-                <element signature="e#4211#4212#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -140,16 +129,17 @@
         <option value="$PROJECT_DIR$/src/VirtualElectionBooth/Encryption/Frame.java" />
         <option value="$PROJECT_DIR$/src/VirtualElectionBooth/Encryption/JEncryptRSA.java" />
         <option value="$PROJECT_DIR$/src/VirtualElectionBooth/Encryption/JEncryptDES.java" />
-        <option value="$PROJECT_DIR$/src/VirtualElectionBooth/CTF/CTF.java" />
         <option value="$PROJECT_DIR$/src/VirtualElectionBooth/CLA/CLA.java" />
+        <option value="$PROJECT_DIR$/src/VirtualElectionBooth/CTF/CTF.java" />
         <option value="$PROJECT_DIR$/src/VirtualElectionBooth/Voter/Voter.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="1913" />
-    <option name="width" value="974" />
-    <option name="height" value="1047" />
+    <option name="x" value="240" />
+    <option name="y" value="128" />
+    <option name="width" value="1440" />
+    <option name="height" value="773" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -157,7 +147,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -216,7 +206,7 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -311,10 +301,10 @@
     </configuration>
     <list>
       <item itemvalue="Application.CLA" />
-      <item itemvalue="Application.Voter" />
       <item itemvalue="Application.CTF" />
-      <item itemvalue="Application.main" />
       <item itemvalue="Application.JEncryptDES" />
+      <item itemvalue="Application.Voter" />
+      <item itemvalue="Application.main" />
     </list>
     <recent_temporary>
       <list>
@@ -385,7 +375,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1912" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Structure" order="0" side_tool="true" weight="0.25" />
@@ -394,10 +384,10 @@
       <window_info id="UI Designer" order="3" />
       <window_info id="Capture Tool" order="4" />
       <window_info id="Favorites" order="5" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="6" visible="true" weight="0.08795309" />
+      <window_info active="true" content_ui="combo" id="Project" order="6" visible="true" weight="0.12818792" />
       <window_info anchor="bottom" id="Version Control" order="0" show_stripe_button="false" />
       <window_info anchor="bottom" id="Terminal" order="1" weight="0.32907802" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.50053304" side_tool="true" visible="true" weight="0.29252437" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.50053304" side_tool="true" weight="0.29252437" />
       <window_info anchor="bottom" id="Event Log" order="3" side_tool="true" />
       <window_info anchor="bottom" id="Messages" order="4" sideWeight="0.49946696" weight="0.29252437" />
       <window_info anchor="bottom" id="Message" order="5" />
@@ -423,20 +413,15 @@
     <MESSAGE value="Final version before Encryption/Decryption" />
     <option name="LAST_COMMIT_MESSAGE" value="Final version before Encryption/Decryption" />
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/VirtualElectionBooth/CLA/CLA.java</url>
-          <line>141</line>
-          <properties />
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
-  </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/VirtualElectionBooth/CLA/Server.java" />
+    <entry file="file://$PROJECT_DIR$/src/VirtualElectionBooth/main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="31" lean-forward="true" selection-start-line="10" selection-start-column="31" selection-end-line="10" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/BallotList.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
@@ -444,10 +429,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/VirtualElectionBooth/main.java">
+    <entry file="file://$PROJECT_DIR$/src/VirtualElectionBooth/Encryption/JEncryptRSA.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="31" lean-forward="true" selection-start-line="10" selection-start-column="31" selection-end-line="10" selection-end-column="31" />
+        <state relative-caret-position="624">
+          <caret line="38" column="10" selection-start-line="38" selection-start-column="10" selection-end-line="38" selection-end-column="10" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -458,30 +446,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/VirtualElectionBooth/Encryption/JEncryptDES.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="24" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="24" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/VirtualElectionBooth/Encryption/JEncryptRSA.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="646">
-          <caret line="38" column="10" selection-start-line="38" selection-start-column="10" selection-end-line="38" selection-end-column="10" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/VirtualElectionBooth/CTF/CTF.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="69" column="12" selection-start-line="69" selection-start-column="12" selection-end-line="70" selection-end-column="82" />
+        <state relative-caret-position="1207">
+          <caret line="73" lean-forward="true" selection-start-line="73" selection-end-line="73" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/VirtualElectionBooth/Encryption/JEncryptDES.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-255">
+          <caret line="10" column="24" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="24" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -490,8 +468,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/VirtualElectionBooth/CLA/CLA.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="71" column="82" selection-start-line="71" selection-start-column="82" selection-end-line="71" selection-end-column="82" />
+        <state relative-caret-position="1117">
+          <caret line="147" column="80" selection-start-line="147" selection-start-column="80" selection-end-line="147" selection-end-column="80" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#updateVoterListWithBallots#0;class#CLAServer#0" />
@@ -503,12 +481,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/VirtualElectionBooth/Voter/Voter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="109" lean-forward="true" selection-start-line="109" selection-end-line="109" />
+        <state relative-caret-position="267">
+          <caret line="45" column="39" selection-start-line="45" selection-start-column="39" selection-end-line="45" selection-end-column="39" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#4181#4182#0" expanded="true" />
-            <element signature="e#4211#4212#0" expanded="true" />
           </folding>
         </state>
       </provider>

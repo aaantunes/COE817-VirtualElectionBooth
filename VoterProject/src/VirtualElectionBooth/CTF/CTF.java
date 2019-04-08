@@ -69,6 +69,8 @@ class CTFServer extends Thread{
             PrintWriter out = new PrintWriter(socket.getOutputStream(),true);
             ObjectOutputStream os = new ObjectOutputStream(socket.getOutputStream());
             ObjectInputStream is = new ObjectInputStream(socket.getInputStream());
+            Frame tframe = new Frame();
+            Frame rFrame = new Frame();
 
             String voterID = "";
             String voterMessage = "";

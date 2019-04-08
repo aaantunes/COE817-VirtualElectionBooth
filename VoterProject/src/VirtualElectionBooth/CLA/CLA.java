@@ -70,6 +70,8 @@ class CLAServer extends Thread{
             PrintWriter out = new PrintWriter(socket.getOutputStream(),true);
             ObjectOutputStream os = new ObjectOutputStream(socket.getOutputStream());
             ObjectInputStream is = new ObjectInputStream(socket.getInputStream());
+            Frame tframe = new Frame();
+            Frame rFrame = new Frame();
 
             String username;
             int validationKey;
@@ -145,6 +147,10 @@ class CLAServer extends Thread{
             System.out.println("You are now connected to CTF on Port# " + socket.getPort() + "\n");
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+            ObjectOutputStream os = new ObjectOutputStream(socket.getOutputStream());
+            ObjectInputStream is = new ObjectInputStream(socket.getInputStream());
+            Frame tframe = new Frame();
+            Frame rFrame = new Frame();
 
             out.println(voterMsg + "_CLA");
         } catch (IOException e){
