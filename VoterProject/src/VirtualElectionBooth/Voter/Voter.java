@@ -1,16 +1,24 @@
 package VirtualElectionBooth.Voter;
 
-import java.io.BufferedReader;
-import java.io.IOException;
+import java.io.*;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
+import java.security.*;
+import javax.crypto.*;
+import VirtualElectionBooth.Encryption.*;
 
 public class Voter {
 
     String username;
     int validationKey;
+    static JEncryptDES des = new JEncryptDES();
+    static JEncryptRSA rsa = new JEncryptRSA();
+    private static SecretKey DESkey = des.generateKey();
+    private static KeyPair keyPair = rsa.buildKeyPair();
+    private static PublicKey pubKey = keyPair.getPublic();
+    private static PrivateKey privateKey = keyPair.getPrivate();
 
     /*Voter Needs:
     * X Method to pick name / id#
@@ -32,6 +40,10 @@ public class Voter {
             System.out.println("You are now connected to CLA on Port# " + socket.getPort());
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+            ObjectOutputStream os = new ObjectOutputStream(socket.getOutputStream());
+            ObjectInputStream is = new ObjectInputStream(socket.getInputStream());
+            Frame tframe = new Frame();
+            Frame rFrame = new Frame();
 
             String username;
             String validNum;
@@ -48,7 +60,7 @@ public class Voter {
                             break;
                         } else {
                             System.out.println("Sorry, you already voted");
-                            //this is where we could show proof they voted (decrypt "BallotList.txt"?
+                            //this is where we could show proof they voted (decrypt "BallotList.txt")?
                             break;
                         }
                     }
@@ -72,7 +84,7 @@ public class Voter {
             Scanner scanner = new Scanner(System.in);
             int vote = scanner.nextInt();
             if (vote < 1 || vote > 2){
-                System.out.println("Please enter an optional value");
+                System.out.println("Please enter a valid option value");
                 createVote(username, validationKey);
             }
             voteMsg = username + "_" + validationKey+ "_" + vote;
@@ -97,6 +109,10 @@ public class Voter {
             System.out.println("You are now connected to CTF on Port# " + socket.getPort() + "\n");
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+            ObjectOutputStream os = new ObjectOutputStream(socket.getOutputStream());
+            ObjectInputStream is = new ObjectInputStream(socket.getInputStream());
+            Frame tframe = new Frame();
+            Frame rFrame = new Frame();
 
             System.out.println("Sending vote: " + vote);
             out.println(vote);

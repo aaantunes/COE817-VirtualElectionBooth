@@ -5,6 +5,9 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Hashtable;
 import java.util.Random;
+import java.security.*;
+import javax.crypto.*;
+import VirtualElectionBooth.Encryption.*;
 
 public class CLA {
 
@@ -18,6 +21,13 @@ public class CLA {
     * X send list to CTF
     */
 
+    static JEncryptDES des = new JEncryptDES();
+    static JEncryptRSA rsa = new JEncryptRSA();
+    private static SecretKey DESkey = des.generateKey();
+    private static KeyPair keyPair = rsa.buildKeyPair();
+    private static PublicKey pubKey = keyPair.getPublic();
+    private static PrivateKey privateKey = keyPair.getPrivate();
+
     public static void main(String[] args) {
         //Set up connection with voter
         try (ServerSocket serverSocket = new ServerSocket(1200)){
@@ -25,7 +35,7 @@ public class CLA {
             System.out.println("\nUpdating Voter List...\n");
 
             while(true){
-                new CLAServer(serverSocket.accept()).start();
+                new CLAServer(serverSocket.accept(), DESkey,keyPair).start();
                 //no way to exit application bc of this while loop
             }
         } catch (IOException e){
@@ -36,11 +46,21 @@ public class CLA {
 
 class CLAServer extends Thread{
     private Socket socket;
+    private SecretKey des;
+    private KeyPair keyPair;
+    private PublicKey pubKey;
+    private PrivateKey privateKey;
+    private PublicKey VoterPub = null;
+    private PublicKey CTFpub = null;
 
     private static Hashtable<String, Integer> voterList = new Hashtable<>();
 
-    public CLAServer(Socket socket){
+    public CLAServer(Socket socket, SecretKey des, KeyPair keyPair){
+        this.des=des;
+        this.keyPair=keyPair;
         this.socket = socket;
+        pubKey = keyPair.getPublic();
+        privateKey = keyPair.getPrivate();
     }
 
     @Override
@@ -48,6 +68,10 @@ class CLAServer extends Thread{
         try{
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             PrintWriter out = new PrintWriter(socket.getOutputStream(),true);
+            ObjectOutputStream os = new ObjectOutputStream(socket.getOutputStream());
+            ObjectInputStream is = new ObjectInputStream(socket.getInputStream());
+            Frame tframe = new Frame();
+            Frame rFrame = new Frame();
 
             String username;
             int validationKey;
@@ -123,6 +147,10 @@ class CLAServer extends Thread{
             System.out.println("You are now connected to CTF on Port# " + socket.getPort() + "\n");
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+            ObjectOutputStream os = new ObjectOutputStream(socket.getOutputStream());
+            ObjectInputStream is = new ObjectInputStream(socket.getInputStream());
+            Frame tframe = new Frame();
+            Frame rFrame = new Frame();
 
             out.println(voterMsg + "_CLA");
         } catch (IOException e){

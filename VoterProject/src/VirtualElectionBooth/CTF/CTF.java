@@ -4,6 +4,9 @@ import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.security.*;
+import javax.crypto.*;
+import VirtualElectionBooth.Encryption.*;
 
 public class CTF {
 
@@ -27,6 +30,12 @@ public class CTF {
     *   currently, voter is still given the option to choose who to vote for
     *   although he doesnt actually vote. it would be nice to not give him the option
     * */
+    JEncryptDES des = new JEncryptDES();
+    JEncryptRSA rsa = new JEncryptRSA();
+    private SecretKey DESkey = null;
+    private KeyPair keyPair = rsa.buildKeyPair();
+    private PublicKey pubKey = keyPair.getPublic();
+    private PrivateKey privateKey = keyPair.getPrivate();
 
     public static void main(String[] args) {
         //Set up connection with voter
@@ -58,6 +67,10 @@ class CTFServer extends Thread{
         try{
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             PrintWriter out = new PrintWriter(socket.getOutputStream(),true);
+            ObjectOutputStream os = new ObjectOutputStream(socket.getOutputStream());
+            ObjectInputStream is = new ObjectInputStream(socket.getInputStream());
+            Frame tframe = new Frame();
+            Frame rFrame = new Frame();
 
             String voterID = "";
             String voterMessage = "";
