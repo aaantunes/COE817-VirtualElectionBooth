@@ -1,4 +1,4 @@
-package coe817;
+package VirtualElectionBooth.Encryption;
 
 import javax.crypto.*;
 import java.security.InvalidKeyException;

@@ -48,7 +48,7 @@ public class Voter {
                             break;
                         } else {
                             System.out.println("Sorry, you already voted");
-                            //this is where we could show proof they voted (decrypt "BallotList.txt"?
+                            //this is where we could show proof they voted (decrypt "BallotList.txt")?
                             break;
                         }
                     }
@@ -72,7 +72,7 @@ public class Voter {
             Scanner scanner = new Scanner(System.in);
             int vote = scanner.nextInt();
             if (vote < 1 || vote > 2){
-                System.out.println("Please enter an optional value");
+                System.out.println("Please enter a valid option value");
                 createVote(username, validationKey);
             }
             voteMsg = username + "_" + validationKey+ "_" + vote;

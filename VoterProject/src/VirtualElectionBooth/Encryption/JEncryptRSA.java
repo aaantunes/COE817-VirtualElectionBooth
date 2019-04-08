@@ -1,7 +1,11 @@
-package coe817;
+package VirtualElectionBooth.Encryption;
 
-import java.security.*;
 import javax.crypto.Cipher;
+import java.security.Key;
+import java.security.KeyPair;
+import java.security.KeyPairGenerator;
+
+;
 
 /**
  *
