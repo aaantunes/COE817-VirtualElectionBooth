@@ -10,7 +10,7 @@ import java.security.NoSuchAlgorithmException;
  */
 public class JEncryptDES {
     
-    public static SecretKey generateKey() {
+    public SecretKey generateKey() {
         SecretKey key = null;
         try{
             KeyGenerator keygenerator = KeyGenerator.getInstance("DES");
@@ -21,7 +21,7 @@ public class JEncryptDES {
         return key;
     }
     
-    public static byte[] DESEncrypt(byte[] msg, SecretKey myDesKey){
+    public byte[] DESEncrypt(byte[] msg, SecretKey myDesKey){
         byte[] result = null;
         try{
             Cipher desCipher;
@@ -49,7 +49,7 @@ public class JEncryptDES {
         return result;
     }
     
-    public static byte[] DESDecrypt(byte[] msg, SecretKey myDesKey){
+    public byte[] DESDecrypt(byte[] msg, SecretKey myDesKey){
             byte[] result = null;
         try{
 

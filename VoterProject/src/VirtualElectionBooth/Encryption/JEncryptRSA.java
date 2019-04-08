@@ -13,7 +13,7 @@ import java.security.KeyPairGenerator;
  */
 public class JEncryptRSA {
 
-    public static KeyPair buildKeyPair() {
+    public KeyPair buildKeyPair() {
         final int keySize = 2048;
         KeyPairGenerator keyPairGenerator = null;
         try{
@@ -24,7 +24,7 @@ public class JEncryptRSA {
         return keyPairGenerator.genKeyPair();
     }
 
-    public static byte[] encrypt(Key privateKey, byte[] message){
+    public byte[] encrypt(Key privateKey, byte[] message){
         Cipher cipher = null;
         byte[] result = null;
         try{
@@ -36,7 +36,7 @@ public class JEncryptRSA {
         return result;
     }
     
-    public static byte[] decrypt(Key publicKey, byte [] encrypted){
+    public byte[] decrypt(Key publicKey, byte [] encrypted){
         Cipher cipher = null;
         byte[] result = null;
         try{
