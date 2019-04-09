@@ -31,7 +31,7 @@ public class JEncryptRSA {
             cipher = Cipher.getInstance("RSA");  
             cipher.init(Cipher.ENCRYPT_MODE, privateKey);
             result = cipher.doFinal(message);  
-        }catch(Exception e){}
+        }catch(Exception e){System.out.println(e);}
 
         return result;
     }
@@ -43,7 +43,7 @@ public class JEncryptRSA {
             cipher = Cipher.getInstance("RSA");  
             cipher.init(Cipher.DECRYPT_MODE, publicKey);
             result = cipher.doFinal(encrypted);
-        }catch(Exception e){}
+        }catch(Exception e){System.out.println(e);}
         
         return result;
     }

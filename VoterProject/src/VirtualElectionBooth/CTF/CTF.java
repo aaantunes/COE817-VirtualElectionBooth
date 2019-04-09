@@ -31,11 +31,11 @@ public class CTF {
     *   although he doesnt actually vote. it would be nice to not give him the option
     * */
     JEncryptDES des = new JEncryptDES();
-    JEncryptRSA rsa = new JEncryptRSA();
+    static JEncryptRSA rsa = new JEncryptRSA();
     private SecretKey DESkey = null;
-    private KeyPair keyPair = rsa.buildKeyPair();
-    private PublicKey pubKey = keyPair.getPublic();
-    private PrivateKey privateKey = keyPair.getPrivate();
+    private static KeyPair keyPair = rsa.buildKeyPair();
+    private static PublicKey pubKey = keyPair.getPublic();
+    private static PrivateKey privateKey = keyPair.getPrivate();
 
     public static void main(String[] args) {
         //Set up connection with voter
@@ -43,7 +43,7 @@ public class CTF {
             System.out.println("CTFServer Starting...\nWaiting for connections...\n");
 
             while(true){
-                new CTFServer(serverSocket.accept()).start();
+                new CTFServer(serverSocket.accept(), pubKey, privateKey).start();
                 //no way to exit application bc of this while loop
             }
         } catch (IOException e){
@@ -54,12 +54,18 @@ public class CTF {
 
 class CTFServer extends Thread{
     private Socket socket;
+    private PublicKey pubKey;
+    private PrivateKey privateKey;
+    static JEncryptDES des = new JEncryptDES();
+    static JEncryptRSA rsa = new JEncryptRSA();
 
     //list containing all eligable voters(Who can still vote/ have not voted yet) received from CLA
     private static ArrayList<String> voterList = new ArrayList<>();
 
-    public CTFServer(Socket socket){
+    public CTFServer(Socket socket, PublicKey pub, PrivateKey priv){
         this.socket = socket;
+        pubKey = pub;
+        privateKey = priv;
     }
 
     @Override
@@ -69,8 +75,17 @@ class CTFServer extends Thread{
             PrintWriter out = new PrintWriter(socket.getOutputStream(),true);
             ObjectOutputStream os = new ObjectOutputStream(socket.getOutputStream());
             ObjectInputStream is = new ObjectInputStream(socket.getInputStream());
-            Frame tframe = new Frame();
+            Frame tFrame = new Frame();
             Frame rFrame = new Frame();
+
+            tFrame.data = pubKey.getEncoded();
+            os.writeObject(tFrame);
+            os.reset();
+            rFrame = (Frame) is.readObject();
+            PublicKey CLAPub = rFrame.getPublic();
+            rFrame = (Frame) is.readObject();
+            rFrame.data = rsa.decrypt(privateKey , rFrame.data);
+            SecretKey desKey = rFrame.getDES();
 
             String voterID = "";
             String voterMessage = "";
@@ -105,6 +120,7 @@ class CTFServer extends Thread{
             }
         } catch (IOException e){
             e.getMessage();
+        } catch (Exception e){
         } finally {
             try{
                 socket.close();

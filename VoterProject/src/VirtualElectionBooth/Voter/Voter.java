@@ -15,7 +15,6 @@ public class Voter {
     int validationKey;
     static JEncryptDES des = new JEncryptDES();
     static JEncryptRSA rsa = new JEncryptRSA();
-    private static SecretKey DESkey = des.generateKey();
     private static KeyPair keyPair = rsa.buildKeyPair();
     private static PublicKey pubKey = keyPair.getPublic();
     private static PrivateKey privateKey = keyPair.getPrivate();
@@ -42,8 +41,17 @@ public class Voter {
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
             ObjectOutputStream os = new ObjectOutputStream(socket.getOutputStream());
             ObjectInputStream is = new ObjectInputStream(socket.getInputStream());
-            Frame tframe = new Frame();
+            Frame tFrame = new Frame();
             Frame rFrame = new Frame();
+
+            tFrame.data = pubKey.getEncoded();
+            os.writeObject(tFrame);
+            os.reset();
+            rFrame = (Frame) is.readObject();
+            PublicKey CLAPub = rFrame.getPublic();
+            rFrame = (Frame) is.readObject();
+            rFrame.data = rsa.decrypt(privateKey , rFrame.data);
+            SecretKey desKey = rFrame.getDES();
 
             String username;
             String validNum;
@@ -74,7 +82,7 @@ public class Voter {
 
         } catch (IOException e){
             e.getMessage();
-        }
+        } catch (Exception e){}
     }
 
     public static String createVote(String username, String validationKey){
@@ -111,7 +119,7 @@ public class Voter {
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
             ObjectOutputStream os = new ObjectOutputStream(socket.getOutputStream());
             ObjectInputStream is = new ObjectInputStream(socket.getInputStream());
-            Frame tframe = new Frame();
+            Frame tFrame = new Frame();
             Frame rFrame = new Frame();
 
             System.out.println("Sending vote: " + vote);

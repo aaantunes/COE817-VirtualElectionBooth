@@ -35,7 +35,7 @@ public class CLA {
             System.out.println("\nUpdating Voter List...\n");
 
             while(true){
-                new CLAServer(serverSocket.accept(), DESkey,keyPair).start();
+                new CLAServer(serverSocket.accept(), DESkey, keyPair).start();
                 //no way to exit application bc of this while loop
             }
         } catch (IOException e){
@@ -46,32 +46,50 @@ public class CLA {
 
 class CLAServer extends Thread{
     private Socket socket;
-    private SecretKey des;
+    private SecretKey desKey;
+    private static SecretKey SessionKey;
     private KeyPair keyPair;
     private PublicKey pubKey;
     private PrivateKey privateKey;
-    private PublicKey VoterPub = null;
-    private PublicKey CTFpub = null;
+    private static PublicKey publicKey;
+    static JEncryptDES des = new JEncryptDES();
+    static JEncryptRSA rsa = new JEncryptRSA();
 
     private static Hashtable<String, Integer> voterList = new Hashtable<>();
 
     public CLAServer(Socket socket, SecretKey des, KeyPair keyPair){
-        this.des=des;
+        desKey=des;
         this.keyPair=keyPair;
         this.socket = socket;
         pubKey = keyPair.getPublic();
         privateKey = keyPair.getPrivate();
+        desKey = des;
+        publicKey = pubKey;
+        SessionKey = desKey;
     }
 
     @Override
-    public void run(){
-        try{
+    public void run() {
+        try {
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            PrintWriter out = new PrintWriter(socket.getOutputStream(),true);
+            PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
             ObjectOutputStream os = new ObjectOutputStream(socket.getOutputStream());
             ObjectInputStream is = new ObjectInputStream(socket.getInputStream());
-            Frame tframe = new Frame();
+            Frame tFrame = new Frame();
             Frame rFrame = new Frame();
+
+            //This section should use a KDC or some sort of Certificate however,
+            // for the purpose of simplification we're transmitting the keys
+            rFrame = (Frame) is.readObject();
+            PublicKey voterPub = rFrame.getPublic();
+            tFrame.data = pubKey.getEncoded();
+            os.writeObject(tFrame);
+            os.reset();
+            byte[] encrypted = rsa.encrypt(voterPub , desKey.getEncoded());
+            tFrame.data = encrypted;
+            os.writeObject(tFrame);
+            os.reset();
+
 
             String username;
             int validationKey;
@@ -79,25 +97,26 @@ class CLAServer extends Thread{
 
             updateVoterListWithBallots();
 
-            while((receivedMsg = in.readLine()) != null){
+            while ((receivedMsg = in.readLine()) != null) {
                 System.out.println("--------------------------------------------");
                 username = receivedMsg;
-                 if (username.toUpperCase().equals("EXIT")){
-                     System.out.println("The election is over...");
-                     break;
-                 } else {
-                     System.out.println("Received voter's username: " + username);
-                     validationKey = checkUserValidation(username);
-                     out.println(validationKey);
-                     if (validationKey != 100000){
-                         System.out.println("Sent voter's validation number: " + validationKey);
-                     } else {
-                         System.out.println("Voter is unable to vote");
-                     }
-                 }
+                if (username.toUpperCase().equals("EXIT")) {
+                    System.out.println("The election is over...");
+                    break;
+                } else {
+                    System.out.println("Received voter's username: " + username);
+                    validationKey = checkUserValidation(username);
+                    out.println(validationKey);
+                    if (validationKey != 100000) {
+                        System.out.println("Sent voter's validation number: " + validationKey);
+                    } else {
+                        System.out.println("Voter is unable to vote");
+                    }
+                }
             }
-        } catch (IOException e){
+        } catch (IOException e) {
             e.getMessage();
+        } catch (Exception e){
         } finally {
             try{
                 socket.close();
@@ -149,12 +168,22 @@ class CLAServer extends Thread{
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
             ObjectOutputStream os = new ObjectOutputStream(socket.getOutputStream());
             ObjectInputStream is = new ObjectInputStream(socket.getInputStream());
-            Frame tframe = new Frame();
+            Frame tFrame = new Frame();
             Frame rFrame = new Frame();
+
+            rFrame = (Frame) is.readObject();
+            PublicKey CTFPub = rFrame.getPublic();
+            tFrame.data = publicKey.getEncoded();
+            os.writeObject(tFrame);
+            os.reset();
+            byte[] encrypted = rsa.encrypt(CTFPub , SessionKey.getEncoded());
+            tFrame.data = encrypted;
+            os.writeObject(tFrame);
+            os.reset();
 
             out.println(voterMsg + "_CLA");
         } catch (IOException e){
             e.getMessage();
-        }
+        } catch (Exception e){}
     }
 }
