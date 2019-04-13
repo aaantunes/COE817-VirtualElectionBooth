@@ -15,7 +15,6 @@ public class Voter {
     int validationKey;
     static JEncryptDES des = new JEncryptDES();
     static JEncryptRSA rsa = new JEncryptRSA();
-    private static SecretKey DESkey = des.generateKey();
     private static KeyPair keyPair = rsa.buildKeyPair();
     private static PublicKey pubKey = keyPair.getPublic();
     private static PrivateKey privateKey = keyPair.getPrivate();
@@ -38,22 +37,30 @@ public class Voter {
 
         try (Socket socket = new Socket("localhost", 1200)) {
             System.out.println("You are now connected to CLA on Port# " + socket.getPort());
-            BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
             ObjectOutputStream os = new ObjectOutputStream(socket.getOutputStream());
             ObjectInputStream is = new ObjectInputStream(socket.getInputStream());
-            Frame tframe = new Frame();
+            Transmitter tr = new Transmitter();
+            Frame tFrame = new Frame();
             Frame rFrame = new Frame();
+
+            tFrame.data = pubKey.getEncoded();
+            os.writeObject(tFrame);
+            os.reset();
+            rFrame = (Frame) is.readObject();
+            PublicKey CLAPub = rFrame.getPublic();
+            rFrame = (Frame) is.readObject();
+            rFrame.data = rsa.decrypt(privateKey , rFrame.data);
+            SecretKey desKey = rFrame.getDES();
 
             String username;
             String validNum;
 
             System.out.println("Please enter a username: ");
             username = scanner.nextLine();
-            out.println(username);
+            tr.send(os, username, desKey);
             if (!username.toUpperCase().equals("EXIT")){
                 while (true) {
-                    if ((validNum = in.readLine()) != null) {
+                    if ((validNum = tr.recieve(is, desKey)) != null) {
                         if (!validNum.equals("100000")){
                             System.out.println("Voters Validation Number is: " + validNum);
                             connectToCTF(createVote(username,validNum));
@@ -74,7 +81,8 @@ public class Voter {
 
         } catch (IOException e){
             e.getMessage();
-        }
+            System.out.println(e);
+        } catch (Exception e){System.out.println(e);}
     }
 
     public static String createVote(String username, String validationKey){
@@ -107,24 +115,29 @@ public class Voter {
 
         try (Socket socket = new Socket("localhost", 1201)) {
             System.out.println("You are now connected to CTF on Port# " + socket.getPort() + "\n");
-            BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
             ObjectOutputStream os = new ObjectOutputStream(socket.getOutputStream());
             ObjectInputStream is = new ObjectInputStream(socket.getInputStream());
-            Frame tframe = new Frame();
+            Transmitter tr = new Transmitter();
+            Frame tFrame = new Frame();
             Frame rFrame = new Frame();
+            JEncryptDES des = new JEncryptDES();
+            SecretKey SessionKey = des.generateKey();
+
+            rFrame = (Frame) is.readObject();
+            PublicKey CTFPub = rFrame.getPublic();
+            tFrame.data = pubKey.getEncoded();
+            os.writeObject(tFrame);
+            os.reset();
+            byte[] encrypted = rsa.encrypt(CTFPub , SessionKey.getEncoded());
+            tFrame.data = encrypted;
+            os.writeObject(tFrame);
+            os.reset();
 
             System.out.println("Sending vote: " + vote);
-            out.println(vote);
-//            while (true) {
-//                if ((validNum = in.readLine()) != null) {
-//                    System.out.println("Valid Num is: " + validNum);
-//                    break;
-//                }
-//            }
+            tr.send(os, vote, SessionKey);
         } catch (IOException e){
             e.getMessage();
-        }
+        } catch (Exception e){System.out.println(e);}
     }
 
     public static void main(String[] args) {
