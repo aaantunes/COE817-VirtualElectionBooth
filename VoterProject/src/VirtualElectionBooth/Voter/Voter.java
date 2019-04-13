@@ -41,6 +41,7 @@ public class Voter {
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
             ObjectOutputStream os = new ObjectOutputStream(socket.getOutputStream());
             ObjectInputStream is = new ObjectInputStream(socket.getInputStream());
+            Transmitter tr = new Transmitter();
             Frame tFrame = new Frame();
             Frame rFrame = new Frame();
 
@@ -58,10 +59,13 @@ public class Voter {
 
             System.out.println("Please enter a username: ");
             username = scanner.nextLine();
-            out.println(username);
+            //out.println(username);
+            //out.flush();
+            tr.send(os, username, desKey);
             if (!username.toUpperCase().equals("EXIT")){
                 while (true) {
-                    if ((validNum = in.readLine()) != null) {
+                    //if ((validNum = in.readLine()) != null) {
+                    if ((validNum = tr.recieve(is, desKey)) != null) {
                         if (!validNum.equals("100000")){
                             System.out.println("Voters Validation Number is: " + validNum);
                             connectToCTF(createVote(username,validNum));
@@ -82,7 +86,8 @@ public class Voter {
 
         } catch (IOException e){
             e.getMessage();
-        } catch (Exception e){}
+            System.out.println(e);
+        } catch (Exception e){System.out.println(e);}
     }
 
     public static String createVote(String username, String validationKey){
@@ -119,11 +124,25 @@ public class Voter {
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
             ObjectOutputStream os = new ObjectOutputStream(socket.getOutputStream());
             ObjectInputStream is = new ObjectInputStream(socket.getInputStream());
+            Transmitter tr = new Transmitter();
             Frame tFrame = new Frame();
             Frame rFrame = new Frame();
+            JEncryptDES des = new JEncryptDES();
+            SecretKey SessionKey = des.generateKey();
+
+            rFrame = (Frame) is.readObject();
+            PublicKey CTFPub = rFrame.getPublic();
+            tFrame.data = pubKey.getEncoded();
+            os.writeObject(tFrame);
+            os.reset();
+            byte[] encrypted = rsa.encrypt(CTFPub , SessionKey.getEncoded());
+            tFrame.data = encrypted;
+            os.writeObject(tFrame);
+            os.reset();
 
             System.out.println("Sending vote: " + vote);
-            out.println(vote);
+            //out.println(vote);
+            tr.send(os, vote, SessionKey);
 //            while (true) {
 //                if ((validNum = in.readLine()) != null) {
 //                    System.out.println("Valid Num is: " + validNum);
@@ -132,7 +151,7 @@ public class Voter {
 //            }
         } catch (IOException e){
             e.getMessage();
-        }
+        } catch (Exception e){System.out.println(e);}
     }
 
     public static void main(String[] args) {

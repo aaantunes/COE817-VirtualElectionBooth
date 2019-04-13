@@ -75,6 +75,7 @@ class CTFServer extends Thread{
             PrintWriter out = new PrintWriter(socket.getOutputStream(),true);
             ObjectOutputStream os = new ObjectOutputStream(socket.getOutputStream());
             ObjectInputStream is = new ObjectInputStream(socket.getInputStream());
+            Transmitter tr = new Transmitter();
             Frame tFrame = new Frame();
             Frame rFrame = new Frame();
 
@@ -82,7 +83,7 @@ class CTFServer extends Thread{
             os.writeObject(tFrame);
             os.reset();
             rFrame = (Frame) is.readObject();
-            PublicKey CLAPub = rFrame.getPublic();
+            PublicKey CLAVoterPub = rFrame.getPublic();
             rFrame = (Frame) is.readObject();
             rFrame.data = rsa.decrypt(privateKey , rFrame.data);
             SecretKey desKey = rFrame.getDES();
@@ -91,7 +92,8 @@ class CTFServer extends Thread{
             String voterMessage = "";
             String receivedMsg;
 
-            while((receivedMsg = in.readLine()) != null){
+            //while((receivedMsg = in.readLine()) != null){
+            while((receivedMsg = tr.recieve(is, desKey)) != null){
                 if (receivedMsg.contains("CLA")){
                     //received msg from CLA thread
                     String[] voterSplit = receivedMsg.split("_");
@@ -102,7 +104,7 @@ class CTFServer extends Thread{
                     //receviced msg from Voter thread
                     System.out.println("--------------------------------------------");
                     voterMessage = receivedMsg;
-
+                    System.out.println(receivedMsg);
                     if (voterMessage.toUpperCase().equals("EXIT")){
                         tallyVotes();
                         break;

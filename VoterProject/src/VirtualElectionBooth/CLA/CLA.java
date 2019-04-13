@@ -75,6 +75,7 @@ class CLAServer extends Thread{
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
             ObjectOutputStream os = new ObjectOutputStream(socket.getOutputStream());
             ObjectInputStream is = new ObjectInputStream(socket.getInputStream());
+            Transmitter tr = new Transmitter();
             Frame tFrame = new Frame();
             Frame rFrame = new Frame();
 
@@ -90,14 +91,14 @@ class CLAServer extends Thread{
             os.writeObject(tFrame);
             os.reset();
 
-
             String username;
             int validationKey;
             String receivedMsg;
 
             updateVoterListWithBallots();
 
-            while ((receivedMsg = in.readLine()) != null) {
+            //while ((receivedMsg = in.readLine()) != null) {
+            while ((receivedMsg = tr.recieve(is, desKey)) != null) {
                 System.out.println("--------------------------------------------");
                 username = receivedMsg;
                 if (username.toUpperCase().equals("EXIT")) {
@@ -106,9 +107,11 @@ class CLAServer extends Thread{
                 } else {
                     System.out.println("Received voter's username: " + username);
                     validationKey = checkUserValidation(username);
-                    out.println(validationKey);
+//                    out.println(validationKey);
+//                    out.flush();
+                    tr.send(os, Integer.toString(validationKey), desKey);
                     if (validationKey != 100000) {
-                        System.out.println("Sent voter's validation number: " + validationKey);
+                        System.out.println("Sent voter "+username+"'s validation number: " + validationKey);
                     } else {
                         System.out.println("Voter is unable to vote");
                     }
@@ -120,7 +123,7 @@ class CLAServer extends Thread{
         } finally {
             try{
                 socket.close();
-            } catch (IOException e){}
+            } catch (IOException e){System.out.println(e);}
         }
     }
 
@@ -168,6 +171,7 @@ class CLAServer extends Thread{
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
             ObjectOutputStream os = new ObjectOutputStream(socket.getOutputStream());
             ObjectInputStream is = new ObjectInputStream(socket.getInputStream());
+            Transmitter tr = new Transmitter();
             Frame tFrame = new Frame();
             Frame rFrame = new Frame();
 
@@ -181,7 +185,8 @@ class CLAServer extends Thread{
             os.writeObject(tFrame);
             os.reset();
 
-            out.println(voterMsg + "_CLA");
+            //out.println(voterMsg + "_CLA");
+            tr.send(os, voterMsg+"_CLA", SessionKey);
         } catch (IOException e){
             e.getMessage();
         } catch (Exception e){}
