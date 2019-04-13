@@ -71,8 +71,6 @@ class CLAServer extends Thread{
     @Override
     public void run() {
         try {
-            BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
             ObjectOutputStream os = new ObjectOutputStream(socket.getOutputStream());
             ObjectInputStream is = new ObjectInputStream(socket.getInputStream());
             Transmitter tr = new Transmitter();
@@ -97,7 +95,6 @@ class CLAServer extends Thread{
 
             updateVoterListWithBallots();
 
-            //while ((receivedMsg = in.readLine()) != null) {
             while ((receivedMsg = tr.recieve(is, desKey)) != null) {
                 System.out.println("--------------------------------------------");
                 username = receivedMsg;
@@ -107,8 +104,6 @@ class CLAServer extends Thread{
                 } else {
                     System.out.println("Received voter's username: " + username);
                     validationKey = checkUserValidation(username);
-//                    out.println(validationKey);
-//                    out.flush();
                     tr.send(os, Integer.toString(validationKey), desKey);
                     if (validationKey != 100000) {
                         System.out.println("Sent voter "+username+"'s validation number: " + validationKey);
@@ -167,8 +162,6 @@ class CLAServer extends Thread{
 
         try (Socket socket = new Socket("localhost", 1201)) {
             System.out.println("You are now connected to CTF on Port# " + socket.getPort() + "\n");
-            BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
             ObjectOutputStream os = new ObjectOutputStream(socket.getOutputStream());
             ObjectInputStream is = new ObjectInputStream(socket.getInputStream());
             Transmitter tr = new Transmitter();
@@ -185,7 +178,6 @@ class CLAServer extends Thread{
             os.writeObject(tFrame);
             os.reset();
 
-            //out.println(voterMsg + "_CLA");
             tr.send(os, voterMsg+"_CLA", SessionKey);
         } catch (IOException e){
             e.getMessage();

@@ -37,8 +37,6 @@ public class Voter {
 
         try (Socket socket = new Socket("localhost", 1200)) {
             System.out.println("You are now connected to CLA on Port# " + socket.getPort());
-            BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
             ObjectOutputStream os = new ObjectOutputStream(socket.getOutputStream());
             ObjectInputStream is = new ObjectInputStream(socket.getInputStream());
             Transmitter tr = new Transmitter();
@@ -59,12 +57,9 @@ public class Voter {
 
             System.out.println("Please enter a username: ");
             username = scanner.nextLine();
-            //out.println(username);
-            //out.flush();
             tr.send(os, username, desKey);
             if (!username.toUpperCase().equals("EXIT")){
                 while (true) {
-                    //if ((validNum = in.readLine()) != null) {
                     if ((validNum = tr.recieve(is, desKey)) != null) {
                         if (!validNum.equals("100000")){
                             System.out.println("Voters Validation Number is: " + validNum);
@@ -120,8 +115,6 @@ public class Voter {
 
         try (Socket socket = new Socket("localhost", 1201)) {
             System.out.println("You are now connected to CTF on Port# " + socket.getPort() + "\n");
-            BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
             ObjectOutputStream os = new ObjectOutputStream(socket.getOutputStream());
             ObjectInputStream is = new ObjectInputStream(socket.getInputStream());
             Transmitter tr = new Transmitter();
@@ -141,14 +134,7 @@ public class Voter {
             os.reset();
 
             System.out.println("Sending vote: " + vote);
-            //out.println(vote);
             tr.send(os, vote, SessionKey);
-//            while (true) {
-//                if ((validNum = in.readLine()) != null) {
-//                    System.out.println("Valid Num is: " + validNum);
-//                    break;
-//                }
-//            }
         } catch (IOException e){
             e.getMessage();
         } catch (Exception e){System.out.println(e);}

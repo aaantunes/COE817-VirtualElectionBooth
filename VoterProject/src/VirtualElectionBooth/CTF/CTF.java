@@ -71,8 +71,6 @@ class CTFServer extends Thread{
     @Override
     public void run(){
         try{
-            BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            PrintWriter out = new PrintWriter(socket.getOutputStream(),true);
             ObjectOutputStream os = new ObjectOutputStream(socket.getOutputStream());
             ObjectInputStream is = new ObjectInputStream(socket.getInputStream());
             Transmitter tr = new Transmitter();
@@ -92,7 +90,6 @@ class CTFServer extends Thread{
             String voterMessage = "";
             String receivedMsg;
 
-            //while((receivedMsg = in.readLine()) != null){
             while((receivedMsg = tr.recieve(is, desKey)) != null){
                 if (receivedMsg.contains("CLA")){
                     //received msg from CLA thread
